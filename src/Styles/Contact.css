@@ -1,0 +1,25 @@
+/* Contact.css */
+.contact-container {
+    padding: 20px;
+    text-align: center;
+    transition: background-color 0.3s, color 0.3s;
+  }
+  
+  .contact-container.light {
+    background-color: #ffffff;
+    color: #000000;
+  }
+  
+  .contact-container.dark {
+    background-color: #121212;
+    color: #ffffff;
+  }
+  
+  .contact-container h2 {
+    margin-bottom: 10px;
+  }
+  
+  .contact-container p {
+    margin-bottom: 20px;
+  }
+  
