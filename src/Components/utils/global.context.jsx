@@ -1,45 +1,58 @@
-import { createContext, useReducer, useMemo } from 'react';
+import React from "react";
+import axios from "axios";
+import { createContext, useEffect, useMemo, useReducer, useState } from "react";
 
-// Initial state
-export const initialState = { theme: 'light', data: [], favs: [] };
+export const initialState = { theme: "light", data: [] };
 
-// Action types
-const actionTypes = {
-    TOGGLE_THEME: 'TOGGLE_THEME',
-    SET_DATA: 'SET_DATA',
-    ADD_FAV: 'ADD_FAV',
-    REMOVE_FAV: 'REMOVE_FAV',
+const DentistContext = () => {
+  const url = "https://jsonplaceholder.typicode.com/users";
+  const [resp, setResp] = useState([]);
+
+  try {
+    const getFetch = async () => {
+      const { data } = await axios.get(url);
+      setResp(data);
+    };
+    useEffect(() => {
+      getFetch();
+    }, []);
+  } catch (error) {
+    console.log(error);
+  }
+  return resp;
 };
 
-// Reducer to manage global state
-const reducer = (state, action) => {
-    switch (action.type) {
-        case actionTypes.TOGGLE_THEME:
-            return { ...state, theme: state.theme === 'light' ? 'dark' : 'light' };
-        case actionTypes.SET_DATA:
-            return { ...state, data: action.payload };
-        case actionTypes.ADD_FAV:
-            return { ...state, favs: [...state.favs, action.payload] };
-        case actionTypes.REMOVE_FAV:
-            return { ...state, favs: state.favs.filter(fav => fav.id !== action.payload.id) };
-        default:
-            return state;
-    }
+export const reducer = (state, action) => {
+  switch (action.type) {
+    case "dark":
+      return { ...state, theme: "dark" };
+    case "light":
+      return { ...state, theme: "light" };
+    default:
+      return state;
+  }
 };
-
-// Create context
 export const ContextGlobal = createContext();
 
-// Provider for the context
+
+
 export const ContextProvider = ({ children }) => {
-    const [state, dispatch] = useReducer(reducer, initialState);
-    
-    // Memoization of values to avoid unnecessary renders
-    const contextValue = useMemo(() => ({ state, dispatch }), [state, dispatch]);
-    
-    return (
-        <ContextGlobal.Provider value={contextValue}>
-            {children}
-        </ContextGlobal.Provider>
-    );
+  initialState.data = DentistContext();
+   
+  //Aqui deberan implementar la logica propia del Context, utilizando el hook useMemo
+
+  const [state, dispatch] = useReducer(reducer, initialState);
+
+  const providerValues = useMemo(
+    () => ({
+      state,
+      dispatch,
+    }),
+    [state]
+  );
+  return (
+    <ContextGlobal.Provider value={{ providerValues }}>
+      {children}
+    </ContextGlobal.Provider>
+  );
 };

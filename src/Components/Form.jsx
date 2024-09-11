@@ -1,53 +1,79 @@
-import React, { useState } from "react";
+import React from "react";
+
+import { useState } from "react";
 
 const Form = () => {
-  const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
-  const [submitted, setSubmitted] = useState(false);
-  const [error, setError] = useState("");
+  //Aqui deberan implementar el form completo con sus validaciones
+  const [form, setForm] = useState({
+    name: "",
+    email: "",
+    submitted: false,
+    message: "",
+  });
 
-  const emailRegex = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/;
-
-  const handleSubmit = (event) => {
-    event.preventDefault();
-
-    // Validaciones
-    if (name.trim().length > 3 && emailRegex.test(email)) {
-      setSubmitted(true);
-      setError("");
-      console.log("Datos enviados:", { name, email }); // Muestra los datos en consola
-    } else {
-      setSubmitted(false);
-      setError("Por favor verifique su información nuevamente");
-    }
+  const handleChange = ({ target }) => {
+    const { name, value } = target;
+    setForm({
+      ...form,
+      [name]: value,
+    });
   };
 
+  const isValidEmail = (email) => {
+    const re =
+      /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    return re.test(email);
+  };
+
+  const onSubmit = (e) => {
+    e.preventDefault();
+
+    
+
+    setForm((prev) => ({
+      ...prev,
+      submitted: true,
+      message:
+        "gracias  " + prev.name + "  te contactaremos cuanto antes via Email",
+    }));
+
+    console.log(form);
+  };
+  
   return (
     <div>
-      <form onSubmit={handleSubmit}>
-        <input 
-          type="text" 
-          placeholder="Nombre completo" 
-          value={name} 
-          onChange={(e) => setName(e.target.value)} 
+      <form onSubmit={onSubmit}>
+        <label htmlFor="name">Complete Name</label>
+        <input
+          type="text"
+          name="name"
+          value={form.name}
+          onChange={handleChange}
+          required
         />
-        <input 
-          type="email" 
-          placeholder="Correo Electrónico" 
-          value={email} 
-          onChange={(e) => setEmail(e.target.value)} 
+        {form.name.trim().length <= 5 && (
+          <span style={{ color: "red" }}> Este campo es obligatorio</span>
+        )}
+
+        <label htmlFor="email">Email</label>
+        <input
+          type="text"
+          name="email"
+          value={form.email}
+          onChange={handleChange}
+          required
         />
-        <button type="submit">Enviar</button>
+        {!isValidEmail(form.email) && (
+          <span style={{ color: "red" }}> Verificar el formato de email</span>
+        )}
+        <button type="submit"> enviar </button>
       </form>
-
-      {/* Mostrar mensaje de error si no pasa las validaciones */}
-      {error && <p style={{ color: "red" }}>{error}</p>}
-
-      {/* Mostrar mensaje de éxito si el formulario fue enviado */}
-      {submitted && (
-        <p>
-          Gracias {name}, te contactaremos cuando antes vía mail a {email}.
-        </p>
+      {form.submitted && (
+        <div
+          style={{ display: "flex", justifyContent: "center", marginTop: 30 }}
+        >
+          <h2>{form.message}</h2>
+        </div>
       )}
     </div>
   );
