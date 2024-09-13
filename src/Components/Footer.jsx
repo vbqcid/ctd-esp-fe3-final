@@ -1,82 +1,33 @@
-import React from "react";
+import logo from "../images/dh2.png";
+import logoinsta from "../images/ico-instagram.png";
+import logoface from "../images/ico-facebook.png";
+import logotik from "../images/ico-tiktok.png";
+import logowhat from "../images/ico-whatsapp.png";
 
-import { useState } from "react";
-
-const Form = () => {
-  //Aqui deberan implementar el form completo con sus validaciones
-  const [form, setForm] = useState({
-    name: "",
-    email: "",
-    submitted: false,
-    message: "",
-  });
-
-  const handleChange = ({ target }) => {
-    const { name, value } = target;
-    setForm({
-      ...form,
-      [name]: value,
-    });
-  };
-
-  const isValidEmail = (email) => {
-    const re =
-      /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-    return re.test(email);
-  };
-
-  const onSubmit = (e) => {
-    e.preventDefault();
-
-    
-
-    setForm((prev) => ({
-      ...prev,
-      submitted: true,
-      message:
-        "gracias  " + prev.name + "  te contactaremos cuanto antes via Email",
-    }));
-
-    console.log(form);
-  };
-  
+const Footer = () => {
   return (
-    <div>
-      <form onSubmit={onSubmit}>
-        <label htmlFor="name">Complete Name</label>
-        <input
-          type="text"
-          name="name"
-          value={form.name}
-          onChange={handleChange}
-          required
-        />
-        {form.name.trim().length <= 5 && (
-          <span style={{ color: "red" }}> Este campo es obligatorio</span>
-        )}
-
-        <label htmlFor="email">Email</label>
-        <input
-          type="text"
-          name="email"
-          value={form.email}
-          onChange={handleChange}
-          required
-        />
-        {!isValidEmail(form.email) && (
-          <span style={{ color: "red" }}> Verificar el formato de email</span>
-        )}
-        <button type="submit"> enviar </button>
-      </form>
-      {form.submitted && (
-        <div
-          style={{ display: "flex", justifyContent: "center", marginTop: 30 }}
-        >
-          <h2>{form.message}</h2>
-        </div>
-      )}
+    <div
+      className="dark"
+      style={{
+        display: "flex",
+        height: 300,
+        width: "100vw",
+        alignItems: "center",
+        marginTop: 70,
+        justifyContent: "center",
+      }}
+    >
+      <h2 style={{ width: 250, height: 250, marginLeft: 870, marginTop: 150 }}></h2>
+      <img style={{ width: 450, height: 200, marginLeft: 70 }} src={logo} alt="dhlogo" />
+      <nav>
+        <a href="https://www.instagram.com/?hl=es"><img style={{ width: 30, height: 30, marginLeft: 900 }} src={logoinsta} alt="Instagram" /></a>
+        <a href="https://www.facebook.com"><img style={{ width: 30, height: 30, marginLeft: 10 }} src={logoface} alt="Facebook" /></a>
+        <a href="https://www.tiktok.com/es/"><img style={{ width: 30, height: 30, marginLeft: 10 }} src={logotik} alt="TikTok" /></a>
+        <a href="https://web.whatsapp.com/"><img style={{ width: 30, height: 30, marginLeft: 10 }} src={logowhat} alt="WhatsApp" /></a>
+      </nav>
     </div>
+    
   );
 };
 
-export default Form;
+export default Footer;

@@ -15,8 +15,8 @@ const Contact = () => {
     >
       <div style={{ display: "flex", marginBottom: 50, textAlign: "center" }}>
         <div>
-          <h2>Want to know more?</h2>
-          <p>Send us your questions and we will contact you</p>
+          <h2>¿Quieres saber más?</h2>
+          <p>Déjanos tu nombre y tu email y te contactaremos lo mas pronto posible.</p>
         </div>
       </div>
       <Form />

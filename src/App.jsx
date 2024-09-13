@@ -1,5 +1,6 @@
 import Footer from "./Components/Footer";
 import Navbar from "./Components/Navbar";
+import { Layout } from "./Components/Layout";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Home from "./Routes/Home";
 import Favs from "./Routes/Favs";
@@ -11,6 +12,7 @@ function App() {
   return (
     <ContextProvider>
       <BrowserRouter>
+        <Layout>
           <Navbar />
 
           <Routes>
@@ -19,10 +21,10 @@ function App() {
             <Route path="/favs" element={<Favs />} />
             <Route path="/contact" element={<Contact />} />
             <Route path="/dentista/:id" element={<Detail />} />
-            <Route path="*" element={<h1>Error 404 - Page not Found</h1>} />
           </Routes>
           <Footer />
-        </BrowserRouter>
+        </Layout>
+      </BrowserRouter>
     </ContextProvider>
   );
 }

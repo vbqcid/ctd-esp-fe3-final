@@ -34,7 +34,7 @@ const Form = () => {
       ...prev,
       submitted: true,
       message:
-        "gracias  " + prev.name + "  te contactaremos cuanto antes via Email",
+        "gracias  " + prev.name + "  te contactaremos cuanto antes via email",
     }));
 
     console.log(form);
@@ -43,7 +43,7 @@ const Form = () => {
   return (
     <div>
       <form onSubmit={onSubmit}>
-        <label htmlFor="name">Complete Name</label>
+        <label htmlFor="name">Nombre completo</label>
         <input
           type="text"
           name="name"
@@ -57,7 +57,7 @@ const Form = () => {
 
         <label htmlFor="email">Email</label>
         <input
-          type="text"
+          type="email"
           name="email"
           value={form.email}
           onChange={handleChange}
@@ -68,6 +68,8 @@ const Form = () => {
         )}
         <button type="submit"> enviar </button>
       </form>
+      
+      
       {form.submitted && (
         <div
           style={{ display: "flex", justifyContent: "center", marginTop: 30 }}
