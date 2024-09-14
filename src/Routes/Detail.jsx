@@ -34,7 +34,7 @@ const Detail = () => {
   
   return (
     <>
-      <h1>Detail Dentist id </h1>
+      <h1>Información</h1>
       <div
         style={{height:'100vh',display: "flex", justifyContent: "center", color: "black" }}
       >

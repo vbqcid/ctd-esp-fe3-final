@@ -11,7 +11,7 @@ const Home = () => {
 
   return (
     <>
-      <h1>Home</h1>
+      <h1>DENTISTAS</h1>
       <div className="card-grid">
         {/* Aqui deberias renderizar las cards */}
 

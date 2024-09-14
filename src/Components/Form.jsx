@@ -34,7 +34,7 @@ const Form = () => {
       ...prev,
       submitted: true,
       message:
-        "gracias  " + prev.name + "  te contactaremos cuanto antes via email",
+        "Gracias  " + prev.name + "  te contactaremos cuanto antes via email",
     }));
 
     console.log(form);

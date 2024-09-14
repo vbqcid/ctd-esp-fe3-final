@@ -32,7 +32,7 @@ const Navbar = () => {
             : dispatch({ type: "light" })
         }
       >
-        Change theme
+        Cambiar tema
       </button>
     </div>
 

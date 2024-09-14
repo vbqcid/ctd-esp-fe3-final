@@ -33,7 +33,7 @@ const Favs = () => {
 
   return (
     <>
-      <h1>Dentists Favs</h1>
+      <h1>Dentistas favoritos</h1>
       <div style={{ height: "100vh", marginBottom: 150 }}>
         <div className="card-grid">
           {filteredDentists.length > 0 ? (
@@ -47,7 +47,7 @@ const Favs = () => {
               />
             ))
           ) : (
-            <h2>No Hay Asignados Dentistas Favoritos</h2>
+            <h2>No hay dentistas favoritos asignados</h2>
           )}
           {/* este componente debe consumir los destacados del localStorage */}
           {/* Deberan renderizar una Card por cada uno de ellos */}
